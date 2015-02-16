@@ -45,6 +45,16 @@ module JavaBuildpack
 
       def jar_name
         "h1-#{@version}.zip"
+        zips="*.zip"
+        zips.each do |zip|
+          IO.popen(['unzip', '-o', '-d', @application.root.to_s, zip.to_s, '*.jar']) do |io|
+            io.readlines.each do |line|
+              line.gsub!(/\s*$/, '')
+              next unless line.chomp =~ /\.jar$/
+              jar = line.split()[-1]
+              return jar
+            end
+          end
       end
        
 
