@@ -27,13 +27,7 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
-        jarname = ["h1.jar", "h2.jar"]  
-        puts jarname[0]  
-        puts jarname[1]  
-        download_jar(jarname[0], tomcat_lib)
-        download_jar(jarname[1], tomcat_lib)
-         #download_jar(jar_name, tomcat_lib)
-         #download_jar(jar_name1, tomcat_lib)
+        download_jar(jarname, tomcat_lib)
       end
 
       # (see JavaBuildpack::Component::BaseComponent#release)
@@ -50,11 +44,9 @@ module JavaBuildpack
       private
 
       def jar_name
-        "h1-#{@version}.jar"
+        "h1-#{@version}.zip"
       end
-       def jar_name1
-        "h2-#{@version}.jar"
-      end
+       
 
     end
 
