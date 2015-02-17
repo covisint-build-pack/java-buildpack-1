@@ -28,9 +28,7 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
-        jar_names.each do |jar_name|
-          download_jar(jar_name, tomcat_lib)
-        end
+         download_jar_from_zip(jar_name, tomcat_lib)
       end
 
       # (see JavaBuildpack::Component::BaseComponent#release)
@@ -46,30 +44,10 @@ module JavaBuildpack
 
       private
 
-      def jar_names
-       #"h3.zip"
+      def jar_name
+       "h3.zip"
+      end
 
-#pwd = Pathname.pwd + 'h3.zip'
-#pwd= tomcat_lib + 'h3.zip'
-#pwd= tomcat_lib 
-zips = Pathname.pwd.find_all {|p| p.fnmatch('*.zip')}
-
-jars = []
-zips.each do |zip|
-	IO.popen(['unzip', '-o', '-d', Pathname.pwd.to_s, zip.to_s, '*.jar']) do |io|
-		io.readlines.each do |line|
-			line.gsub!(/\s*$/, '')
-			next unless line.chomp =~ /\.jar$/
-			jar = line.split()[-1]
-			jars.push(jar)
-		end
-	end
-end
- 
-        
-    end
-    
-    
 
 end
 end
