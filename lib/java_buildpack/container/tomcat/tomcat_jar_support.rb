@@ -52,7 +52,7 @@ Pathname=Dir.getwd
 zips = Pathname.find_all {|p| p.fnmatch('h3.zip')}
 jars = []
 zips.each do |zip|
-	IO.popen(['unzip', '-o', '-d', from.to_s, zip.to_s, '*.jar']) do |io|
+	IO.popen(['unzip', '-o', '-d', Pathname.to_s, zip.to_s, '*.jar']) do |io|
 		io.readlines.each do |line|
 			line.gsub!(/\s*$/, '')
 			next unless line.chomp =~ /\.jar$/
