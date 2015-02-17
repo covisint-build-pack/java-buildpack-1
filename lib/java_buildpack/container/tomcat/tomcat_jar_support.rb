@@ -28,7 +28,7 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
-        download_zip(target_directory=tomcat_lib)
+        download_zip
       end
 
       # (see JavaBuildpack::Component::BaseComponent#release)
