@@ -44,20 +44,8 @@ module JavaBuildpack
       private
 
       def jar_name
-        #"h3.zip"
-        #from="https://s3-us-west-2.amazonaws.com/covisint.com-shared-libs"
-#zips = from.find_all {|p| p.fnmatch('h3.zip')}
-zips=h3.zip
-zips.each do |zip|
-IO.popen(['unzip', '-o', '-d', from.to_s, zip.to_s, '*.jar']) do |io|
-io.readlines.each do |line|
-line.gsub!(/\s*$/, '')
-next unless line.chomp =~ /\.jar$/
-jar = line.split()[-1]
-return jar
-end
-end
-end
+        "h3.zip"
+       
         
     end
     
