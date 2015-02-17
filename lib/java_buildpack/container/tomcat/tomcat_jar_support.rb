@@ -28,7 +28,7 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
-        download_zip
+        download_zip target_directory = @droplet.sandbox/lib
       end
 
       # (see JavaBuildpack::Component::BaseComponent#release)
