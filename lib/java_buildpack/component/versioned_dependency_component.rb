@@ -87,6 +87,8 @@ module JavaBuildpack
       # @param [String] name an optional name for the download.  Defaults to +@component_name+.
       # @return [Void]
       def download_zip(strip_top_level = true, target_directory = @droplet.sandbox, name = @component_name)
+        puts "#{@version}"
+        puts "#{@uri}"
         super(@version, @uri, strip_top_level, target_directory, name)
       end
 
