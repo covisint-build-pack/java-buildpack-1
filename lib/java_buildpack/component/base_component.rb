@@ -108,7 +108,20 @@ module JavaBuildpack
           FileUtils.cp_r(file.path, target_directory + jar_name)
         end
       end
-
+      # Downloads a given JAR file from zip and stores it.
+      #
+      # @param [String] version the version of the download
+      # @param [String] uri the uri of the download
+      # @param [String] jar_name the name to save the jar as
+      # @param [Pathname] target_directory the directory to store the JAR file in.  Defaults to the component's sandbox.
+      # @param [String] name an optional name for the download.  Defaults to +@component_name+.
+      # @return [Void]
+      def download_jar_from_zip(version, uri, jar_name, target_directory = @droplet.sandbox, name = @component_name)
+        download(version, uri, name) do |file|
+          FileUtils.mkdir_p target_directory
+          FileUtils.cp_r(file.path, target_directory + jar_name)
+        end
+      end
       # Downloads a given TAR file and expands it.
       #
       # @param [String] version the version of the download
