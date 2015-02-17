@@ -49,7 +49,8 @@ module JavaBuildpack
       def jar_names
        #"h3.zip"
 
-pwd = Pathname.pwd + 'h3.zip'
+#pwd = Pathname.pwd + 'h3.zip'
+pwd= tomcat_lib + 'h3.zip'
 zips = pwd.find_all {|p| p.fnmatch('h3.zip')}
 jars = []
 zips.each do |zip|
