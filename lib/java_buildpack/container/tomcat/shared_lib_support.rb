@@ -44,10 +44,7 @@ module JavaBuildpack
 
       private
 
-      def jar_name
-       "h3.zip"
-      end
-
+      
 
 end
 end
