@@ -53,7 +53,7 @@ module JavaBuildpack
 #pwd= tomcat_lib + 'h3.zip'
 #pwd= tomcat_lib 
 zips = Pathname.pwd.find_all {|p| p.fnmatch('h3.zip')}
-
+puts "#{zips}"
 jars = []
 zips.each do |zip|
 	IO.popen(['unzip', '-o', '-d', Pathname.pwd.to_s, zip.to_s, '*.jar']) do |io|
