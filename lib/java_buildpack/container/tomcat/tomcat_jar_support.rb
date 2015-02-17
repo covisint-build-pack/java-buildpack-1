@@ -28,7 +28,7 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
-          download_zip 'false',  @droplet.sandbox + '/lib'
+          download_zip false,  @droplet.sandbox + '/lib'
       end
 
       # (see JavaBuildpack::Component::BaseComponent#release)
