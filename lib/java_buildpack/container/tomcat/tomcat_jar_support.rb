@@ -17,6 +17,7 @@
 require 'java_buildpack/component/versioned_dependency_component'
 require 'java_buildpack/container'
 require 'java_buildpack/container/tomcat/tomcat_utils'
+require 'zip'
 
 module JavaBuildpack
   module Container
@@ -44,8 +45,12 @@ module JavaBuildpack
       private
 
       def jar_name
-        "h3.zip"
-       
+       # "h3.zip"
+  Zip::File.open("h3.zip") do |zipfile|
+  zipfile.each do |file|
+    return file
+  end
+end
         
     end
     
