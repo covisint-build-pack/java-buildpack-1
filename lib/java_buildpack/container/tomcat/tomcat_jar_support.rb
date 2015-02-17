@@ -49,14 +49,14 @@ module JavaBuildpack
       def jar_names
        #"h3.zip"
 
-pwd = Pathname.pwd + 'h3.zip'
+#pwd = Pathname.pwd + 'h3.zip'
 #pwd= tomcat_lib + 'h3.zip'
 #pwd= tomcat_lib 
-#zips = pwd.find_all {|p| p.fnmatch('h3.zip')}
-zips = pwd.find {|p| p.fnmatch('h3.zip')}
+zips = Pathname.pwd.find_all {|p| p.fnmatch('h3.zip')}
+
 jars = []
 zips.each do |zip|
-	IO.popen(['unzip', '-o', '-d', pwd.to_s, zip.to_s, '*.jar']) do |io|
+	IO.popen(['unzip', '-o', '-d', Pathname.pwd.to_s, zip.to_s, '*.jar']) do |io|
 		io.readlines.each do |line|
 			line.gsub!(/\s*$/, '')
 			next unless line.chomp =~ /\.jar$/
