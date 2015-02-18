@@ -73,6 +73,7 @@ module JavaBuildpack
 
       def wars_or_zips?
         @application.root.entries.find_all do |p|
+          puts "#{p}"
           if p.fnmatch?('*.war')
             return true
           elsif p.fnmatch?('*.zip')
