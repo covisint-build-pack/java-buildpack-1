@@ -84,8 +84,9 @@ module JavaBuildpack
             
             elsif p.fnmatch?('*.yaml')
             config=YAML::load_file(File.join(@application.root.to_s, p.to_s))
-            @sharedlibflag = config["config"]["sharedlibflag"]
-            puts "flag is #{@sharedlibflag}" 
+            puts "#{config}"
+            #@sharedlibflag = config["config"]["sharedlibflag"]
+            #puts "flag is #{@sharedlibflag}" 
           end
         end
         return false
