@@ -21,7 +21,7 @@ require 'java_buildpack/util/format_duration'
 require 'java_buildpack/util/shell'
 require 'java_buildpack/util/space_case'
 require 'java_buildpack/util/sanitizer'
-require 'yaml'
+
 
 module JavaBuildpack
   module Component
@@ -136,15 +136,7 @@ module JavaBuildpack
       # @return [Void]
       def download_zip(version, uri, strip_top_level = true, target_directory = @droplet.sandbox,
                        name = @component_name)
-         @application.root.entries.find_all do |p|               
-                # check if app dir contains yaml file
-                if p.fnmatch?('*.yaml')
-                  config=YAML::load_file(File.join(@application.root.to_s, p.to_s))
-                  @sharedlibflag = config["applications"]["sharedlibflag"]
-                  
-                 end
-               end   
-         if @sharedlibflag == true         
+         
         download(version, uri, name) do |file|
           with_timing "Expanding #{name} to #{target_directory.relative_path_from(@droplet.root)}" do
             if strip_top_level
@@ -157,7 +149,7 @@ module JavaBuildpack
             else
               FileUtils.mkdir_p target_directory
               shell "unzip -qq #{file.path} -d #{target_directory} 2>&1"
-            end
+            
           end
         end
       end
