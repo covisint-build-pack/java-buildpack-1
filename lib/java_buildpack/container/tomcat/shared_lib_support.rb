@@ -4,6 +4,7 @@
 # user should make entry of uploaded zip file into index.yml file
 
 require 'java_buildpack/component/versioned_dependency_component'
+require 'java_buildpack/component/base_component'
 require 'java_buildpack/container'
 require 'java_buildpack/container/tomcat/tomcat_utils'
 require 'yaml'
@@ -12,7 +13,8 @@ module JavaBuildpack
   module Container
 
     # Encapsulates the detect, compile, and release functionality for Tomcat lifecycle support.
-    class SharedLibSupport < JavaBuildpack::Component::VersionedDependencyComponent
+    #class SharedLibSupport < JavaBuildpack::Component::VersionedDependencyComponent
+    class SharedLibSupport < JavaBuildpack::Component::BaseComponent
       include JavaBuildpack::Container
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
@@ -22,11 +24,13 @@ module JavaBuildpack
                        if p.fnmatch?('*.yaml')
                          config=YAML::load_file(File.join(@application.root.to_s, p.to_s))
                          @sharedlibflag = config["applications"]["sharedlibflag"]
-                         
+                         @version= config["applications"]["version"]
+                         @uri= config["applications"]["uri"]  
                         end
                       end  
          if @sharedlibflag == true              
-          download_zip '211','https://s3.aws',false, tomcat_lib
+          #download_zip '211','https://s3.aws',false, tomcat_lib
+          download_zip @version,@uri,false, tomcat_lib
           
          else
            true
