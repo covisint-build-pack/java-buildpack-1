@@ -26,7 +26,7 @@ module JavaBuildpack
                         end
                       end  
          if @sharedlibflag == true              
-          download_zip version,uri,false, tomcat_lib
+          download_zip '211','https://s3.aws',false, tomcat_lib
           
          else
            true
