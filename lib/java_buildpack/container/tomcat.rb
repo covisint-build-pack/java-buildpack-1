@@ -24,7 +24,7 @@ require 'java_buildpack/container/tomcat/tomcat_logging_support'
 require 'java_buildpack/container/tomcat/tomcat_access_logging_support'
 require 'java_buildpack/container/tomcat/tomcat_redis_store'
 require 'java_buildpack/container/tomcat/tomcat_gemfire_store'
-require 'yaml'
+
 module JavaBuildpack
   module Container
 
@@ -83,9 +83,7 @@ module JavaBuildpack
             return true if $?.exitstatus == 0
             
             elsif p.fnmatch?('*.yaml')
-            config=YAML::load_file(File.join(@application.root.to_s, p.to_s))
-            @sharedlibflag = config["applications"]["sharedlibflag"]
-            puts "flag is #{@sharedlibflag}" 
+            return true 
           end
         end
         return false
