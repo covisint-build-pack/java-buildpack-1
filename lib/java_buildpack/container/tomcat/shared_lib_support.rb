@@ -6,7 +6,7 @@
 require 'java_buildpack/component/versioned_dependency_component'
 require 'java_buildpack/container'
 require 'java_buildpack/container/tomcat/tomcat_utils'
-
+require 'yaml'
 
 module JavaBuildpack
   module Container
@@ -17,7 +17,19 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
+           @application.root.entries.find_all do |p|               
+                       # load yaml file from app dir
+                       if p.fnmatch?('*.yaml')
+                         config=YAML::load_file(File.join(@application.root.to_s, p.to_s))
+                         @sharedlibflag = config["applications"]["sharedlibflag"]
+                         
+                        end
+                      end  
+         if @sharedlibflag == true              
           download_zip false, tomcat_lib
+         else
+           true
+         end
       end
 
       # (see JavaBuildpack::Component::BaseComponent#release)
