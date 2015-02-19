@@ -13,10 +13,11 @@ module JavaBuildpack
   module Container
 
     # Encapsulates the detect, compile, and release functionality for Tomcat lifecycle support.
-    #class SharedLibSupport < JavaBuildpack::Component::VersionedDependencyComponent
-    class SharedLibSupport < JavaBuildpack::Component::BaseComponent
+      class SharedLibSupport < JavaBuildpack::Component::BaseComponent
       include JavaBuildpack::Container
-
+      # (see JavaBuildpack::Component::BaseComponent#detect)
+           def detect
+           end
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
            @application.root.entries.find_all do |p|               
@@ -29,7 +30,6 @@ module JavaBuildpack
                         end
                       end  
          if @sharedlibflag == true              
-          #download_zip '211','https://s3.aws',false, tomcat_lib
           download_zip @version,@uri,false, tomcat_lib
           
          else
