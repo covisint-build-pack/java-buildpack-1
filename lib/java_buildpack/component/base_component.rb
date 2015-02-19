@@ -51,8 +51,7 @@ module JavaBuildpack
       #                                      an +Array<String>+ that uniquely identifies the component (e.g.
       #                                      +open_jdk=1.7.0_40+).  Otherwise, +nil+.
       def detect
-        #fail "Method 'detect' must be defined"
-         @version ? id(@version) : nil
+        fail "Method 'detect' must be defined"
       end
 
       # Modifies the application's file system.  The component is expected to transform the application's file system in
@@ -168,9 +167,7 @@ module JavaBuildpack
 
         puts "(#{(Time.now - start_time).duration})"
       end
-def id(version)
-        "#{self.class.to_s.dash_case}=#{version}"
-      end
+
     end
 
   end
