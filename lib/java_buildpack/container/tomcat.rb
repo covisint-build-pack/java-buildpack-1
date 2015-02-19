@@ -82,8 +82,7 @@ module JavaBuildpack
             io.read && io.close
             return true if $?.exitstatus == 0
             
-            elsif p.fnmatch?('*.yaml')
-            return true 
+            
           end
         end
         return false
