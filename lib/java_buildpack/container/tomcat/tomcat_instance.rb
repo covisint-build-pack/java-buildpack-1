@@ -33,13 +33,14 @@ module JavaBuildpack
       # @param [Hash] context a collection of utilities used the component
       def initialize(context)
         super(context) { |candidate_version| candidate_version.check_size(3) }
+         @yamlobj=YamlParser.new(context)
       end
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
        if isYaml?
-          yamlobj=YamlParser.new
-          libs=yamlobj.read_config "webapps"
+          
+          libs=@yamlobj.read_config "webapps"
           libs.each do |lib| 
           puts lib.downloadUrl.to_s.gsub(".jar",".war")    
           download(lib.version.to_s, lib.downloadUrl.to_s.gsub(".jar",".war")) { |file| expand file }
