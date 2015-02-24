@@ -75,6 +75,6 @@ end
 #http://nexus.covisintrnd.com:8081/nexus/service/local/artifact/maven/resolve?g=com.test&a=project&v=1.0&r=test_repo_1_release
 #iterate the map and call the download with URI , version
 #puts map
-map=object.read_config "webapps"
+#map=object.read_config "webapps"
 #puts map
 #object.construct_uri
