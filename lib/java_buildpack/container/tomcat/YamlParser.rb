@@ -42,7 +42,7 @@ def detect
     arry=read_config "libraries"
     puts arry[0].downloadUrl
     puts arry[0].version
-  
+    download_jar "1.0.0", "http://admin:admin123@nexus.covisintrnd.com:8081/nexus/service/local/artifact/maven/content?g=com.test&a=project&v=1.0&r=test_repo_1_release", "project1" 
     #download_jar arry[0].downloadUrl, arry[0].version,project-1
       
     
