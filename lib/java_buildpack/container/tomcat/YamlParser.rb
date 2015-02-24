@@ -13,7 +13,7 @@ class MvnDownloadArtifact
   end
 end
 
-class YamlParser
+class YamlParser < JavaBuildpack::Component::BaseComponent
   SHA1 = 'artifact-resolution/data/sha1'
   def initialize(context)
      @application.root.entries.find_all do |p|               
