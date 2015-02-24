@@ -25,7 +25,6 @@ class YamlParser < JavaBuildpack::Component::BaseComponent
                             end
                           end  
     @location =  @config["repository"]["location"]
-    puts "#{@location}"
     @repoid =  @config["repository"]["repo-id"]
     $username =  @config["repository"]["authentication"]["username"]
     $password =  @config["repository"]["authentication"]["password"]
