@@ -24,7 +24,7 @@ module JavaBuildpack
           arry=obj1.read_config "libraries"
           puts arry
                        
-          download_zip @version,@uri,false, tomcat_lib
+          #download_zip @version,@uri,false, tomcat_lib
           
          
       end
