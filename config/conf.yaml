@@ -1,5 +1,0 @@
----
-applications:
-  sharedlibflag: false
-  version: 1.9.1
-  uri: https://s3-us-west-2.amazonaws.com/covisint.com-shared-libs/sharedlibs.zip

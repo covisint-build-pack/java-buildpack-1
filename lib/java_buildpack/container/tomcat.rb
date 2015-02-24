@@ -50,7 +50,6 @@ module JavaBuildpack
         [
           TomcatInstance.new(sub_configuration_context(context, 'tomcat')),
           TomcatLifecycleSupport.new(sub_configuration_context(context, 'lifecycle_support')),
-          #SharedLibSupport.new(context),
           YamlParser.new(context),
           TomcatLoggingSupport.new(sub_configuration_context(context, 'logging_support')),
           TomcatAccessLoggingSupport.new(sub_configuration_context(context, 'access_logging_support')),
@@ -74,7 +73,6 @@ module JavaBuildpack
 
       def wars_or_zips?
         @application.root.entries.find_all do |p|
-          #puts "#{p}"
           if p.fnmatch?('*.war')
             return true
           elsif p.fnmatch?('*.zip')
@@ -88,15 +86,15 @@ module JavaBuildpack
         end
         return false
       end
-def isYaml?
-                 @application.root.entries.find_all do |p|
+	  def isYaml?
+               @application.root.entries.find_all do |p|
                      if p.fnmatch?('*.yaml')
                         return true
                      end  
                     return false
                  end   
             end  
-    end
+      end
 
   end
 end
