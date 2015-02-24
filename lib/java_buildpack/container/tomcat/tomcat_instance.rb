@@ -38,7 +38,7 @@ module JavaBuildpack
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
        if isYaml?
-          yamlobj=YamlParser.new(context)
+          yamlobj=YamlParser.new
           libs=yamlobj.read_config "webapps"
           libs.each do |lib| 
           download(lib.version.to_s, lib.downloadUrl.to_s.gsub(".jar",".war")) { |file| expand file }
