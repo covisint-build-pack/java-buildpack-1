@@ -3,6 +3,7 @@ require 'pp'
 require 'open-uri'
 require 'rexml/document'
 require 'java_buildpack/component/base_component'
+require 'java_buildpack/container/tomcat/tomcat_utils'
 
 class MvnDownloadArtifact
   attr_reader :downloadUrl, :sha1, :version, :jarname
@@ -28,8 +29,8 @@ class YamlParser < JavaBuildpack::Component::BaseComponent
                           end  
     @location =  @config["repository"]["location"]
     @repoid =  @config["repository"]["repo-id"]
-    $username =  @config["repository"]["authentication"]["username"]
-    $password =  @config["repository"]["authentication"]["password"]
+    @username =  @config["repository"]["authentication"]["username"]
+    @password =  @config["repository"]["authentication"]["password"]
     #@url = "http://#{@username}:#{@password}@#{@location}?"
     @mvngavUrl = "http://#{@location}/service/local/artifact/maven/resolve?"
     @artifactUrl = "http://#{@username}:#{@password}@#{@location}/service/local/artifact/maven/content?"
