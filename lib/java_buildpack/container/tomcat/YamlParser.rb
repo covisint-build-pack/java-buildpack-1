@@ -36,7 +36,7 @@ class YamlParser < JavaBuildpack::Component::BaseComponent
   end
 def compile
     arry=read_config "libraries"
-    puts arry
+    puts "*****************************#{arry}"
     
   end
   def read_config(component)
