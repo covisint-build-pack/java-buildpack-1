@@ -41,6 +41,7 @@ module JavaBuildpack
           yamlobj=YamlParser.new
           libs=yamlobj.read_config "webapps"
           libs.each do |lib| 
+          puts lib.downloadUrl.to_s.gsub(".jar",".war")    
           download(lib.version.to_s, lib.downloadUrl.to_s.gsub(".jar",".war")) { |file| expand file }
           link_webapps(@application.root.children, root)
           end
