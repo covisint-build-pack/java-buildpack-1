@@ -43,7 +43,7 @@ def detect
     puts arry[0].downloadUrl
     puts arry[0].version
   
-    download_jar arry[0].downloadUrl, arry[0].version, "project-1"
+    #download_jar arry[0].downloadUrl, arry[0].version,project-1
       
     
   end
