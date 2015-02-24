@@ -61,7 +61,7 @@ def detect
         #parse YAML and get the xml response
         contextPath = val.gsub(/\s/,"&").gsub(":","=")+"#{@repopath}"
 
-        mvnXmlResponse=open(@mvngavUrl+contextPath, http_basic_authentication: ["#{$username}", "#{$password}"]).read
+        mvnXmlResponse=open(@mvngavUrl+contextPath, http_basic_authentication: ["#{@username}", "#{@password}"]).read
       rescue OpenURI::HTTPError => ex
         puts "wrong url endpoint: #{@mvngavUrl+contextPath}"
         abort
