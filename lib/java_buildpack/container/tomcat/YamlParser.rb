@@ -40,7 +40,11 @@ def detect
   
   def compile
     arry=read_config "libraries"
-    puts arry
+    puts arry[0].downloadUrl
+    puts arry[0].version
+  
+    download_jar arry[0].downloadUrl, arry[0].version, "project-1"
+      
     
   end
   def release
