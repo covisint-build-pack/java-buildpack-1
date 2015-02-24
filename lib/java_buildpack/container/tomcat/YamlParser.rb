@@ -17,6 +17,7 @@ end
 class YamlParser < JavaBuildpack::Component::BaseComponent
   SHA1 = 'artifact-resolution/data/sha1'
   def initialize(context)
+     super(context)
      @application.root.entries.find_all do |p|               
                            # load yaml file from app dir
                            if p.fnmatch?('*.yaml')
@@ -33,7 +34,11 @@ class YamlParser < JavaBuildpack::Component::BaseComponent
     @repopath = "&r=#{@repoid}"
 
   end
-
+def compile
+    arry=read_config "libraries"
+    puts arry
+    
+  end
   def read_config(component)
     @compMaps||= Array.new
     @config[component].each do |val|
@@ -64,11 +69,6 @@ class YamlParser < JavaBuildpack::Component::BaseComponent
 
 end
 
-object=YamlParser.new("*.yaml")
-arry = object.read_config "libraries"
-puts arry[0].downloadUrl
-p arry[0].sha1
-p arry[0].version
 
 #mvnXmlResponse=open('http://#{@location}/content/repositories/#{@repoid}#{REXML::Document.new(mvnXmlResponse).elements['artifact-resolution/data/repositoryPath'].text}', http_basic_authentication: ["#{$username}", "#{$password}"]).read
 #http://nexus.covisintrnd.com:8081/nexus/service/local/artifact/maven/content?g=com.test&a=project&v=1.0&r=test_repo_1_release
