@@ -16,7 +16,12 @@ end
 class YamlParser
   SHA1 = 'artifact-resolution/data/sha1'
   def initialize(context)
-    @config = YAML::load_file(File.join(File.dirname(File.expand_path(__FILE__)), context))
+     @application.root.entries.find_all do |p|               
+                           # load yaml file from app dir
+                           if p.fnmatch?('*.yaml')
+                             @config=YAML::load_file(File.join(@application.root.to_s, p.to_s))
+                            end
+                          end  
     @location =  @config["repository"]["location"]
     @repoid =  @config["repository"]["repo-id"]
     $username =  @config["repository"]["authentication"]["username"]
@@ -58,7 +63,7 @@ class YamlParser
 
 end
 
-object=YamlParser.new("config1.yaml")
+object=YamlParser.new("*.yaml")
 arry = object.read_config "libraries"
 puts arry[0].downloadUrl
 p arry[0].sha1
