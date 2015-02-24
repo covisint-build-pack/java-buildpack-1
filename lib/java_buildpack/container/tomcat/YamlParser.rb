@@ -35,11 +35,17 @@ class YamlParser < JavaBuildpack::Component::BaseComponent
     @repopath = "&r=#{@repoid}"
 
   end
-def compile
+def detect
+  end
+        
+  
+  def compile
     arry=read_config "libraries"
-    puts "*****************************#{arry}"
+    puts arry
     
   end
+  def release
+       end
   def read_config(component)
     @compMaps||= Array.new
     @config[component].each do |val|
