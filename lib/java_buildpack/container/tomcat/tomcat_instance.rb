@@ -32,8 +32,9 @@ module JavaBuildpack
       #
       # @param [Hash] context a collection of utilities used the component
       def initialize(context)
+       @yamlobj=YamlParser.new(context)
         super(context) { |candidate_version| candidate_version.check_size(3) }
-        @yamlobj=YamlParser.new(context)
+        
        end
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
