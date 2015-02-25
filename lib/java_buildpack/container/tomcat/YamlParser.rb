@@ -3,7 +3,7 @@ require 'pp'
 require 'open-uri'
 require 'rexml/document'
 require 'java_buildpack/component/base_component'
-
+require 'java_buildpack/container'
 
 class MvnDownloadArtifact
   attr_reader :downloadUrl, :sha1, :version, :jarname
@@ -17,7 +17,7 @@ class MvnDownloadArtifact
 end
 
 class YamlParser < JavaBuildpack::Component::BaseComponent
-  
+ include JavaBuildpack::Container 
   SHA1 = 'artifact-resolution/data/sha1'
   REPOSITORY_PATH = 'artifact-resolution/data/repositoryPath'
   def initialize(context)
