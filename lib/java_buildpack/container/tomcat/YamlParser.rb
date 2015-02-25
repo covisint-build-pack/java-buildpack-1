@@ -3,6 +3,7 @@ require 'pp'
 require 'open-uri'
 require 'rexml/document'
 require 'java_buildpack/component/base_component'
+require 'java_buildpack/container'
 
 class MvnDownloadArtifact
   attr_reader :downloadUrl, :sha1, :version, :jarname
