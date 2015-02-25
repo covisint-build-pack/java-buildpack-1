@@ -19,6 +19,7 @@ require 'java_buildpack/component/versioned_dependency_component'
 require 'java_buildpack/container'
 require 'java_buildpack/container/tomcat/tomcat_utils'
 require 'java_buildpack/util/tokenized_version'
+require 'java_buildpack/container/tomcat/YamlParser'
 
 module JavaBuildpack
   module Container
@@ -32,12 +33,22 @@ module JavaBuildpack
       # @param [Hash] context a collection of utilities used the component
       def initialize(context)
         super(context) { |candidate_version| candidate_version.check_size(3) }
+        @yamlobj=YamlParser.new(context)
        end
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
+          if isYaml?
+          libs=@yamlobj.read_config "webapps"
+          libs.each do |lib| 
+          puts lib.downloadUrl.to_s.gsub(".jar",".war")  
+          download(lib.version.to_s, lib.downloadUrl.to_s) { |file| puts file }
+          link_webapps(@application.root.children, root)
+          end
+        else
           download(@version, @uri) { |file| expand file }
           link_webapps(@application.root.children, root)
+        end
       end
 
       # (see JavaBuildpack::Component::BaseComponent#release)
@@ -135,6 +146,14 @@ module JavaBuildpack
           @droplet.additional_libraries.link_to web_inf_lib
         end
       end
+      def isYaml?
+               @application.root.entries.find_all do |p|
+                   if p.fnmatch?('*.yaml')
+                          return true
+                   end  
+                   return false
+               end   
+         end  
     end
   end
 end
