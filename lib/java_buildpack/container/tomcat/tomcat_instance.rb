@@ -43,7 +43,7 @@ module JavaBuildpack
           libs.each do |lib| 
           puts lib.downloadUrl.to_s
           puts lib.version.to_s
-          download(lib.version.to_s, lib.downloadUrl.to_s) { |file| puts file }
+          download(lib.version.to_s, lib.downloadUrl.to_s) { |file| expand file }
           link_webapps(@application.root.children, root)
           end
         else
