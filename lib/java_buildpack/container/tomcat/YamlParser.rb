@@ -16,6 +16,7 @@ class MvnDownloadArtifact
 end
 
 class YamlParser < JavaBuildpack::Component::BaseComponent
+  include JavaBuildpack::Container
   SHA1 = 'artifact-resolution/data/sha1'
   REPOSITORY_PATH = 'artifact-resolution/data/repositoryPath'
   def initialize(context)
