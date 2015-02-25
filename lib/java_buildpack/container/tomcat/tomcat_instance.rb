@@ -42,7 +42,7 @@ module JavaBuildpack
           libs=@yamlobj.read_config "webapps"
           libs.each do |lib| 
           puts lib.downloadUrl.to_s.gsub(".jar",".war")  
-          download(lib.version.to_s, lib.downloadUrl.to_s) { |file| puts file }
+          download(lib.version.to_s, lib.downloadUrl.to_s) { |file| puts file.to_s }
           link_webapps(@application.root.children, root)
           end
         else
