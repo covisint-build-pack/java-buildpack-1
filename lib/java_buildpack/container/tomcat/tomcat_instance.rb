@@ -52,7 +52,6 @@ module JavaBuildpack
             |file| 
             puts file.class
             puts file.path
-            puts file.basename
             puts file.path.class
             puts @application.root.children.class
             FileUtils.cp_r(file.path, tomcat_webapps)
