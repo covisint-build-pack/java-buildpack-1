@@ -49,17 +49,17 @@ def detect
         
   
   def compile
-    libs=read_config "libraries", "jar"
-    libs.each do |lib| 
-      download_jar lib.version.to_s, lib.downloadUrl.to_s, lib.jarname.to_s, tomcat_lib
-    end 
-    #download_jar "1.0.0", "http://admin:admin123@nexus.covisintrnd.com:8081/nexus/service/local/artifact/maven/content?g=com.test&a=project&v=1.0&r=test_repo_1_release", "project1" 
-    #download_jar arry[0].downloadUrl, arry[0].version,project-1
-      
+    unless @config.nil? || @config == 0
+      libs=read_config "libraries", "jar"
+      libs.each do |lib| 
+        download_jar lib.version.to_s, lib.downloadUrl.to_s, lib.jarname.to_s, tomcat_lib
+      end 
+    end  
     
   end
   def release
        end
+  
   def read_config(component, type)
     @compMaps||= Array.new
     @config[component].each do |val|
