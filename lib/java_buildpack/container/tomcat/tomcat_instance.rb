@@ -47,12 +47,13 @@ module JavaBuildpack
           libs=@yamlobj.read_config "webapps", "war"
           puts "#{libs}"
           libs.each do |lib|
-          puts "#{lib}"  
-          puts lib.downloadUrl.to_s
-          puts lib.version.to_s
-          open(lib.downloadUrl.to_s) { |file| 
-              puts file.path
-               }
+           
+            open("http://nexus.covisintrnd.com:8081/nexus/service/local/artifact/maven/content?g=com.test&a=project&v=1.0&r=test_repo_1_release&p=war", http_basic_authentication: ["admin", "admin123"]) { 
+            |file|  puts file.path
+           
+          #open(lib.downloadUrl.to_s) { |file| 
+           #   puts file.path
+            #   }
           end
         else
           download(@version, @uri) { |file| expand file }
