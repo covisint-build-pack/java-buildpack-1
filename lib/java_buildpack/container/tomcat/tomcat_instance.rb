@@ -36,8 +36,7 @@ module JavaBuildpack
       def initialize(context)
        
         super(context) { |candidate_version| candidate_version.check_size(3) }
-        #@yamlobj=YamlParser.new(context)
-        #puts "#{@yamlobj}"
+        @yamlobj=YamlParser.new(context)
        end
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
