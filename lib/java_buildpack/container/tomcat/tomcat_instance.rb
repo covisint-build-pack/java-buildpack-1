@@ -49,6 +49,7 @@ module JavaBuildpack
           libs=@yamlobj.read_config "webapps", "war"
           puts "#{libs}"
           libs.each do |lib|
+            FileUtils.mkdir_p tomcat_webapps
             outputpath = tomcat_webapps + lib.jarname
             puts "Output file: #{outputpath}"
             open("http://nexus.covisintrnd.com:8081/nexus/service/local/artifact/maven/content?g=com.test&a=project&v=1.0&r=test_repo_1_release&p=war", http_basic_authentication: ["admin", "admin123"]) do 
