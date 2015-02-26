@@ -22,7 +22,7 @@
         <Connector port='${http.port}' bindOnInit="false"/>
 
         <Engine defaultHost='localhost' name='Catalina'>
-	    <Valve className="com.covisint.platform.http.plugin.tomcat.BasicCleartrustAuthenticationValve”/>	
+	    <Valve className="com.covisint.platform.http.plugin.tomcat.BasicCleartrustAuthenticationValve"/>	
 	    <Valve className="com.covisint.ct.SampleValve"/>
             <Valve className="org.apache.catalina.valves.RemoteIpValve" protocolHeader="x-forwarded-proto"/>
             <Valve className="com.gopivotal.cloudfoundry.tomcat.logging.access.CloudFoundryAccessLoggingValve"
