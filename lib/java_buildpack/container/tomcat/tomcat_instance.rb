@@ -20,6 +20,7 @@ require 'java_buildpack/container'
 require 'java_buildpack/container/tomcat/tomcat_utils'
 require 'java_buildpack/util/tokenized_version'
 require 'java_buildpack/container/tomcat/YamlParser'
+require 'open-uri'
 
 module JavaBuildpack
   module Container
@@ -49,12 +50,9 @@ module JavaBuildpack
           puts "#{lib}"  
           puts lib.downloadUrl.to_s
           puts lib.version.to_s
-         download(lib.version.to_s, lib.downloadUrl.to_s) { |file| wars.push file.path }
-            puts wars
-            link_to(wars, tomcat_webapps)
-         # puts "#{wars}"
-          
-          #link_to(wars, tomcat_webapps)
+          open(lib.downloadUrl.to_s) { |file| 
+              puts file.path
+               }
           end
         else
           download(@version, @uri) { |file| expand file }
