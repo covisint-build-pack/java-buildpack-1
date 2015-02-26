@@ -55,7 +55,8 @@ module JavaBuildpack
             puts file.basename
             puts file.path.class
             puts @application.root.children.class
-            link_webapps(file.path, root)
+            FileUtils.cp_r(file.path, tomcat_webapps)
+            #link_webapps(file.path, root)
            #link_to(file.path, tomcat_webapps)
           #open(lib.downloadUrl.to_s) { |file| 
            #   puts file.path
