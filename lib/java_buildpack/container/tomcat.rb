@@ -68,7 +68,7 @@ module JavaBuildpack
 
       def web_inf?
       	puts  (@application.root + 'WEB-INF').exist?
-      	puts wars_or_zips?wars_or_zips?
+      	puts wars_or_zips?
       	puts isYaml?
         (@application.root + 'WEB-INF').exist? ||
           wars_or_zips? || isYaml?
