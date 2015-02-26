@@ -21,6 +21,7 @@ require 'java_buildpack/container/tomcat/tomcat_utils'
 require 'java_buildpack/util/tokenized_version'
 require 'java_buildpack/container/tomcat/YamlParser'
 require 'open-uri'
+require 'pathname'
 
 module JavaBuildpack
   module Container
@@ -57,16 +58,16 @@ module JavaBuildpack
              File.open(outputpath, "w") do |out|
              out.write(file.read)
              end
-            wars.push  outputpath
+            wars.push Pathname.new(outputpath)
            #link_webapps(file.path, root)
            #link_to(file.path, tomcat_webapps)
           #open(lib.downloadUrl.to_s) { |file| 
            #   puts file.path
           end
-           puts Dir.entries(@droplet.sandbox)
-            puts @application.root.children
-            puts wars
-            link_webapps(wars, root)
+           #puts Dir.entries(@droplet.sandbox)
+            #puts @application.root.children
+            puts "wars: #{@wars}"
+            link_webapps(wars, tomcat_webapps)
           end
         else
          
