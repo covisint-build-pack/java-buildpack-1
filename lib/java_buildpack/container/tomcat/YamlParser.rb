@@ -37,14 +37,14 @@ class YamlParser < JavaBuildpack::Component::BaseComponent
     @artifactUrl = "http://#{@username}:#{@password}@#{@location}/service/local/artifact/maven/content?"
     #@repopath = "&r=#{@repoid}"
     
-    @repopath = "&r=#{@repoid}&p=war"
+    @repopath = "&r=#{@repoid}"
   end
 def detect
   end
         
   
   def compile
-    libs=read_config "libraries"
+    libs=read_config "libraries" "jar"
     libs.each do |lib| 
       download_jar lib.version.to_s, lib.downloadUrl.to_s, lib.jarname.to_s, tomcat_lib
     end 
@@ -55,13 +55,13 @@ def detect
   end
   def release
        end
-  def read_config(component)
+  def read_config(component, type)
     @compMaps||= Array.new
     @config[component].each do |val|
 
       begin
         #parse YAML and get the xml response
-        contextPath = val.gsub(/\s/,"&").gsub(":","=")+"#{@repopath}"
+        contextPath = val.gsub(/\s/,"&").gsub(":","=")+"#{@repopath}&p=#{type}"
 
         mvnXmlResponse=open(@mvngavUrl+contextPath, http_basic_authentication: ["#{@username}", "#{@password}"]).read
       rescue OpenURI::HTTPError => ex
