@@ -47,17 +47,20 @@ module JavaBuildpack
           libs=@yamlobj.read_config "webapps", "war"
           puts "#{libs}"
           libs.each do |lib|
-           
-            open("http://nexus.covisintrnd.com:8081/nexus/service/local/artifact/maven/content?g=com.test&a=project&v=1.0&r=test_repo_1_release&p=war", http_basic_authentication: ["admin", "admin123"]) { 
-            |file| 
             FileUtils.mkdir_p tomcat_webapps
-            FileUtils.cp_r(file.path, tomcat_webapps)
-           puts Dir.entries(tomcat_webapps)
+            outputpath = tomcat_webapps + lib.jarname
+            puts "Output file: #{outputpath}"
+            open("http://nexus.covisintrnd.com:8081/nexus/service/local/artifact/maven/content?g=com.test&a=project&v=1.0&r=test_repo_1_release&p=war", http_basic_authentication: ["admin", "admin123"]) do 
+            |file|
+             File.open(outputpath, "w") do |out|
+             out.write(file.read)
+             end
+            puts Dir.entries(tomcat_webapps)
             #link_webapps(file.path, root)
            #link_to(file.path, tomcat_webapps)
           #open(lib.downloadUrl.to_s) { |file| 
            #   puts file.path
-             }
+             
           end
         else
           download(@version, @uri) { |file| expand file }
