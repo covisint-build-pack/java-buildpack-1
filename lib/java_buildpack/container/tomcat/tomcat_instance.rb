@@ -42,34 +42,25 @@ module JavaBuildpack
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
          download(@version, @uri) { |file| expand file }
-          
           if isYaml?
-          wars = []
-          puts "#{@yamlobj}"
-          libs=@yamlobj.read_config "webapps", "war"
-          puts "#{libs}"
-          libs.each do |lib|
-            FileUtils.mkdir_p tomcat_webapps
-            outputpath = @droplet.sandbox + lib.jarname
-            puts "Output file: #{outputpath}"
-            open("http://nexus.covisintrnd.com:8081/nexus/service/local/artifact/maven/content?g=com.test&a=project&v=1.0&r=test_repo_1_release&p=war", http_basic_authentication: ["admin", "admin123"]) do 
-            |file|
-             File.open(outputpath, "w") do |out|
-             out.write(file.read)
-             end
-             puts Pathname.new(outputpath).to_s
-            wars.push Pathname.new(outputpath)
-           #link_webapps(file.path, root)
-           #link_to(file.path, tomcat_webapps)
-          #open(lib.downloadUrl.to_s) { |file| 
-           #   puts file.path
-          end
-           #puts Dir.entries(@droplet.sandbox)
-            #puts @application.root.children
-            puts "wars: #{wars}: #{tomcat_webapps}"
-            
-            link_webapps(wars, tomcat_webapps)
-          end
+               wars = []
+               wapps=@yamlobj.read_config "webapps", "war"
+                     wapps.each do |wapp|
+                        outputpath = @droplet.sandbox + wapp.jarname
+                        puts "Output file: #{outputpath}"
+                       #"http://nexus.covisintrnd.com:8081/nexus/service/local/artifact/maven/content?g=com.test&a=project&v=1.0&r=test_repo_1_release&p=war"
+                        open(wapp.downloadUrl, http_basic_authentication: ["admin", "admin123"]) do 
+                        |file|
+                               File.open(outputpath, "w") do |out|
+                               out.write(file.read)
+                               end
+                               puts Pathname.new(outputpath).to_s
+                               wars.push Pathname.new(outputpath)
+                        end
+                        puts "wars: #{wars}: #{tomcat_webapps}"
+                        FileUtils.mkdir_p tomcat_webapps
+                        link_webapps(wars, tomcat_webapps)
+        end
         else
          
           link_webapps(@application.root.children, root)
