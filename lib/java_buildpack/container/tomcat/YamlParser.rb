@@ -28,16 +28,18 @@ class YamlParser < JavaBuildpack::Component::BaseComponent
                              @config=YAML::load_file(File.join(@application.root.to_s, p.to_s))
                             end
                           end  
-    @location =  @config["repository"]["location"]
-    @repoid =  @config["repository"]["repo-id"]
-    @username =  @config["repository"]["authentication"]["username"]
-    @password =  @config["repository"]["authentication"]["password"]
-    #@url = "http://#{@username}:#{@password}@#{@location}?"
-    @mvngavUrl = "http://#{@location}/service/local/artifact/maven/resolve?"
-    @artifactUrl = "http://#{@username}:#{@password}@#{@location}/service/local/artifact/maven/content?"
-    #@repopath = "&r=#{@repoid}"
-    
-    @repopath = "&r=#{@repoid}"
+            unless @config.nil? || @config == 0                      
+                @location =  @config["repository"]["location"]
+                @repoid =  @config["repository"]["repo-id"]
+                @username =  @config["repository"]["authentication"]["username"]
+                @password =  @config["repository"]["authentication"]["password"]
+                #@url = "http://#{@username}:#{@password}@#{@location}?"
+                @mvngavUrl = "http://#{@location}/service/local/artifact/maven/resolve?"
+                @artifactUrl = "http://#{@username}:#{@password}@#{@location}/service/local/artifact/maven/content?"
+                #@repopath = "&r=#{@repoid}"
+                
+                @repopath = "&r=#{@repoid}"
+            end
   end
 def detect
   end
