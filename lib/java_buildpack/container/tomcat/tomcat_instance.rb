@@ -43,7 +43,7 @@ module JavaBuildpack
           if isYaml?
           wars = []
           puts "#{@yamlobj}"
-          libs=@yamlobj.read_config "webapps"
+          libs=@yamlobj.read_config "webapps" "war"
           puts "#{libs}"
           libs.each do |lib|
           puts "#{lib}"  
