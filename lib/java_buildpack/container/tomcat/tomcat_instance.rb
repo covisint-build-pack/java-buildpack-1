@@ -51,7 +51,7 @@ module JavaBuildpack
           puts lib.version.to_s
           download(lib.version.to_s, lib.downloadUrl.to_s) { |file| 
           #wars.push file.path
-          puts file.path.basename
+          #puts file.path.basename
           link_to(file, tomcat_webapps)
            }
          # puts "#{wars}"
