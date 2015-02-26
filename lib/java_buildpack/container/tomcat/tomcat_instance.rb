@@ -58,6 +58,7 @@ module JavaBuildpack
              File.open(outputpath, "w") do |out|
              out.write(file.read)
              end
+             puts Pathname.new(outputpath).to_s
             wars.push Pathname.new(outputpath)
            #link_webapps(file.path, root)
            #link_to(file.path, tomcat_webapps)
