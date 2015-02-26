@@ -7,7 +7,7 @@ require 'java_buildpack/component/base_component'
 
 class MvnDownloadArtifact
   attr_reader :downloadUrl, :openUriDownloadUrl,:sha1, :version, :artifactname
-  def initialize(downloadUrl, sha1, version, artifactname)
+  def initialize(downloadUrl, openUriDownloadUrl, sha1, version, artifactname)
     # Instance variables
     @downloadUrl = downloadUrl
     @openUriDownloadUrl= openUriDownloadUrl
