@@ -35,9 +35,9 @@ class YamlParser < JavaBuildpack::Component::BaseComponent
     #@url = "http://#{@username}:#{@password}@#{@location}?"
     @mvngavUrl = "http://#{@location}/service/local/artifact/maven/resolve?"
     @artifactUrl = "http://#{@username}:#{@password}@#{@location}/service/local/artifact/maven/content?"
-    @repopath = "&r=#{@repoid}"
+    #@repopath = "&r=#{@repoid}"
     
-    #@repopath = "&r=#{@repoid}&p=war"
+    @repopath = "&r=#{@repoid}&p=war"
   end
 def detect
   end
