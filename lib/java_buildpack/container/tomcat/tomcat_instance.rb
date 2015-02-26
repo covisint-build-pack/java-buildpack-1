@@ -49,8 +49,12 @@ module JavaBuildpack
           libs.each do |lib|
            
             open("http://nexus.covisintrnd.com:8081/nexus/service/local/artifact/maven/content?g=com.test&a=project&v=1.0&r=test_repo_1_release&p=war", http_basic_authentication: ["admin", "admin123"]) { 
-            |file|  puts file.path
-           link_to(file.path, tomcat_webapps)
+            |file| 
+            puts file.path
+            puts file.path.class
+            puts @application.root.children.class
+            link_webapps(file.path, root)
+           #link_to(file.path, tomcat_webapps)
           #open(lib.downloadUrl.to_s) { |file| 
            #   puts file.path
              }
