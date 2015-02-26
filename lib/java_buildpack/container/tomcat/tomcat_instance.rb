@@ -41,8 +41,11 @@ module JavaBuildpack
       def compile
           if isYaml?
           wars = []
+          puts "#{@yamlobj}"
           libs=@yamlobj.read_config "webapps"
-          libs.each do |lib| 
+          puts "#{libs}"
+          libs.each do |lib|
+          puts "#{lib}"  
           puts lib.downloadUrl.to_s
           puts lib.version.to_s
           download(lib.version.to_s, lib.downloadUrl.to_s) { |file| wars.push file.path }
