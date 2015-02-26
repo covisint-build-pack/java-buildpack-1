@@ -56,6 +56,7 @@ module JavaBuildpack
             puts @application.root.children.class
             FileUtils.mkdir_p tomcat_webapps
             FileUtils.cp_r(file.path, tomcat_webapps)
+            Dir.entries(tomcat_webapps)
             #link_webapps(file.path, root)
            #link_to(file.path, tomcat_webapps)
           #open(lib.downloadUrl.to_s) { |file| 
