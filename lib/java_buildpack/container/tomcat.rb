@@ -71,7 +71,7 @@ module JavaBuildpack
       	puts wars_or_zips?
       	puts isYaml?
         (@application.root + 'WEB-INF').exist? ||
-          wars_or_zips? || isYaml?
+          wars_or_zips? || yaml?
       end
 
       def wars_or_zips?
@@ -89,7 +89,7 @@ module JavaBuildpack
         end
         return false
       end
-	def isYaml?
+	def yaml?
        
                @application.root.entries.find_all do |p|
                    if p.fnmatch?('*.yaml')
