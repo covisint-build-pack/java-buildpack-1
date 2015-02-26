@@ -44,7 +44,7 @@ def detect
         
   
   def compile
-    libs=read_config "libraries" "jar"
+    libs=read_config "libraries", "jar"
     libs.each do |lib| 
       download_jar lib.version.to_s, lib.downloadUrl.to_s, lib.jarname.to_s, tomcat_lib
     end 
