@@ -160,8 +160,9 @@ module JavaBuildpack
                    if p.fnmatch?('*.yaml')
                           return true
                    end  
-                   return false
-               end   
+                   
+               end  
+               return false
          end  
     end
   end
