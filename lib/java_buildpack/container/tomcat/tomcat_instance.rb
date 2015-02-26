@@ -53,7 +53,7 @@ module JavaBuildpack
            
           #open(lib.downloadUrl.to_s) { |file| 
            #   puts file.path
-            #   }
+             }
           end
         else
           download(@version, @uri) { |file| expand file }
