@@ -93,12 +93,12 @@ module JavaBuildpack
        
                @application.root.entries.find_all do |p|
                    #if p.fnmatch?('*.yaml')
-                   	if p.fnmatch?('config.yaml')
+                   	if p.fnmatch?('*.yaml')
                    	 puts "****************#{@application.root.entries}"
                           return true
-                   end  
-                   return false
-               end   
+                        end  
+              end   
+             return false
          end   
       end
 
