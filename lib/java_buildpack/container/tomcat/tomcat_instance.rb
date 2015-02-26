@@ -57,14 +57,16 @@ module JavaBuildpack
              File.open(outputpath, "w") do |out|
              out.write(file.read)
              end
-            puts Dir.entries(@droplet.sandbox)
-            puts @application.root.children
-            link_webapps(@application.root.children, root)
-            #link_webapps(file.path, root)
+            wars.push  outputpath
+           #link_webapps(file.path, root)
            #link_to(file.path, tomcat_webapps)
           #open(lib.downloadUrl.to_s) { |file| 
            #   puts file.path
-          end   
+          end
+           puts Dir.entries(@droplet.sandbox)
+            puts @application.root.children
+            puts wars
+            link_webapps(wars, root)
           end
         else
          
