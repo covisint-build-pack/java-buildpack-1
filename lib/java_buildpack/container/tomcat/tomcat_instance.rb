@@ -49,7 +49,7 @@ module JavaBuildpack
                         outputpath = @droplet.sandbox + wapp.jarname
                         puts "Output file: #{outputpath}"
                        #"http://nexus.covisintrnd.com:8081/nexus/service/local/artifact/maven/content?g=com.test&a=project&v=1.0&r=test_repo_1_release&p=war"
-                        open(wapp.downloadUrl, http_basic_authentication: ["admin", "admin123"]) do 
+                        open(wapp.openUriDownloadUrl, http_basic_authentication: ["admin", "admin123"]) do 
                         |file|
                                File.open(outputpath, "w") do |out|
                                out.write(file.read)
