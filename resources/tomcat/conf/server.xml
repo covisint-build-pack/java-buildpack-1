@@ -29,8 +29,8 @@
                    enabled="${access.logging.enabled}"/>
             <Host name='localhost'>
                 <Listener className="com.gopivotal.cloudfoundry.tomcat.lifecycle.ApplicationStartupFailureDetectingLifecycleListener"/>
-				<Valve className="com.covisint.ct.SampleValve"/>
-                <Valve className="com.covisint.platform.http.plugin.tomcat.BasicCleartrustAuthenticationValve”/> 
+		<Valve className="com.covisint.ct.SampleValve"/>
+                <!--<Valve className="com.covisint.platform.http.plugin.tomcat.BasicCleartrustAuthenticationValve”/> -->
             </Host>
         </Engine>
     </Service>
