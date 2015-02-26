@@ -60,7 +60,7 @@ module JavaBuildpack
            #link_to(file.path, tomcat_webapps)
           #open(lib.downloadUrl.to_s) { |file| 
            #   puts file.path
-             
+          end   
           end
         else
           download(@version, @uri) { |file| expand file }
