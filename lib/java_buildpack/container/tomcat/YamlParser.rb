@@ -26,21 +26,24 @@ class YamlParser < JavaBuildpack::Component::BaseComponent
                            # load yaml file from app dir
                            if p.fnmatch?('*.yaml')
                              @config=YAML::load_file(File.join(@application.root.to_s, p.to_s))
+                             puts "config:#{@config}"
+                             unless @config.nil? || @config == 0                      
+                              @location =  @config["repository"]["location"]
+                              @repoid =  @config["repository"]["repo-id"]
+                              @username =  @config["repository"]["authentication"]["username"]
+                              @password =  @config["repository"]["authentication"]["password"]
+                              #@url = "http://#{@username}:#{@password}@#{@location}?"
+                              @mvngavUrl = "http://#{@location}/service/local/artifact/maven/resolve?"
+                              @artifactUrl = "http://#{@username}:#{@password}@#{@location}/service/local/artifact/maven/content?"
+                              #@repopath = "&r=#{@repoid}"
+                              
+                              @repopath = "&r=#{@repoid}"
+                              end
                             end
-                          end  
-            unless @config.nil? || @config == 0                      
-                @location =  @config["repository"]["location"]
-                @repoid =  @config["repository"]["repo-id"]
-                @username =  @config["repository"]["authentication"]["username"]
-                @password =  @config["repository"]["authentication"]["password"]
-                #@url = "http://#{@username}:#{@password}@#{@location}?"
-                @mvngavUrl = "http://#{@location}/service/local/artifact/maven/resolve?"
-                @artifactUrl = "http://#{@username}:#{@password}@#{@location}/service/local/artifact/maven/content?"
-                #@repopath = "&r=#{@repoid}"
-                
-                @repopath = "&r=#{@repoid}"
-            end
+            end  
+           
   end
+  
 def detect
   end
         
