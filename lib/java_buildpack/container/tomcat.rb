@@ -92,7 +92,8 @@ module JavaBuildpack
 	def isYaml?
        
                @application.root.entries.find_all do |p|
-                   if p.fnmatch?('*.yaml')
+                   #if p.fnmatch?('*.yaml')
+                   	if p.fnmatch?('config.yaml')
                    	 puts "****************#{@application.root.entries}"
                           return true
                    end  
