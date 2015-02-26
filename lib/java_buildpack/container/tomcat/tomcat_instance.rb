@@ -50,13 +50,9 @@ module JavaBuildpack
            
             open("http://nexus.covisintrnd.com:8081/nexus/service/local/artifact/maven/content?g=com.test&a=project&v=1.0&r=test_repo_1_release&p=war", http_basic_authentication: ["admin", "admin123"]) { 
             |file| 
-            puts file.class
-            puts file.path
-            puts file.path.class
-            puts @application.root.children.class
             FileUtils.mkdir_p tomcat_webapps
             FileUtils.cp_r(file.path, tomcat_webapps)
-            Dir.entries(tomcat_webapps)
+           puts Dir.entries(tomcat_webapps)
             #link_webapps(file.path, root)
            #link_to(file.path, tomcat_webapps)
           #open(lib.downloadUrl.to_s) { |file| 
