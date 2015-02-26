@@ -52,7 +52,7 @@ module JavaBuildpack
           download(lib.version.to_s, lib.downloadUrl.to_s) { |file| wars.push file.path }
           puts "#{wars}"
           
-          link_to(wars, tomcat_webapps)
+          #link_to(wars, tomcat_webapps)
           end
         else
           download(@version, @uri) { |file| expand file }
