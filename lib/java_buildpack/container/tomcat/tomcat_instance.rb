@@ -67,7 +67,8 @@ module JavaBuildpack
           end
            #puts Dir.entries(@droplet.sandbox)
             #puts @application.root.children
-            puts "wars: #{@wars}"
+            puts "wars: #{wars}: #{tomcat_webapps}"
+            
             link_webapps(wars, tomcat_webapps)
           end
         else
