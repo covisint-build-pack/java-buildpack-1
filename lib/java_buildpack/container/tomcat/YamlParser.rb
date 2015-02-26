@@ -27,7 +27,7 @@ class YamlParser < JavaBuildpack::Component::BaseComponent
                            # load yaml file from app dir
                            if p.fnmatch?('*.yaml')
                              @config=YAML::load_file(File.join(@application.root.to_s, p.to_s))
-                             puts "config:#{@config}"
+                             
                              unless @config.nil? || @config == 0                      
                               @location =  @config["repository"]["location"]
                               @repoid =  @config["repository"]["repo-id"]
