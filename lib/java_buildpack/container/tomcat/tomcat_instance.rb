@@ -58,7 +58,7 @@ module JavaBuildpack
                                wars.push Pathname.new(outputpath)
                         end
                         puts "wars: #{wars}: #{tomcat_webapps}"
-                        #FileUtils.mkdir_p tomcat_webapps
+                        FileUtils.mkdir_p tomcat_webapps
                         link_webapps(wars, tomcat_webapps)
         end
         else
