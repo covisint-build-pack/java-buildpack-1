@@ -137,15 +137,16 @@ module JavaBuildpack
       def link_webapps(from, to)
         webapps = []
         webapps.push(from.find_all {|p| p.fnmatch('*.war')})
-        puts webapps
-        puts from 
-        puts to
+        puts "p: #{p}"
+        puts "webapps: #{webapps}"
+        puts "from: #{from}" 
+        puts "to: #{to}"
 
         # Explode zips
         # TODO: Need to figure out a way to add 'rubyzip' gem to the image
         #       and avoid shelling out to "unzip".
         zips = from.find_all {|p| p.fnmatch('*.zip')}
-        puts zips
+        puts "zips:#{zips}"
         zips.each do |zip|
           IO.popen(['unzip', '-o', '-d', @application.root.to_s, zip.to_s, '*.war']) do |io|
             io.readlines.each do |line|
@@ -153,18 +154,20 @@ module JavaBuildpack
               next unless line.chomp =~ /\.war$/
               war = line.split()[-1]
               webapps.push(Pathname.new(@application.root.to_s) + war)
-              puts webapps
+              puts "zips webapps #{webapps}"
             end
           end
         end
         webapps.flatten!
 
         if (not webapps.empty?)
-          puts webapps
-          puts tomcat_webapps
+          puts "statement #{webapps}"
+          puts "tomact web #{tomcat_webapps}"
           link_to(webapps, tomcat_webapps)
         else
           link_to(from, root)
+          puts "link to #{from}"
+          puts "link to #{root}"
           @droplet.additional_libraries << tomcat_datasource_jar if tomcat_datasource_jar.exist?
           @droplet.additional_libraries.link_to web_inf_lib
         end
